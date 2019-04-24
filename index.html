@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+
+<html> 
+ <head>
+    <title>Template for Websites</title> 
+</head>
+ <body>
+    <p align="center"> 
+      <canvas id="mycanvas"></canvas> 
+    </p>
+ </body>
+
+ <script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js"></script> 
+ 
+ <script>
+    var sketchProc = function(processingInstance) {
+     with (processingInstance) {
+        size(600, 400); 
+        frameRate(60);
+  // colors array
+var time = 0;
+
+var colors = {
+    "a": color(255, 255, 255),
+    "b": color(141, 85, 36),
+    "c": color(198, 134, 66),
+    "d": color(224, 172, 105),
+    "e": color(241, 194, 125),
+    "f": color(255, 219, 172),
+    "g": color(0, 200, 255),
+    "h": color(184,186,186),
+    "i": color(189,206,169),
+    "j": color(242, 242, 242),
+    "k": color(122, 130, 129),
+    "l": color(0, 0, 0),
+    "m": color(156, 51, 12),
+    "n": color(17, 134, 217),
+    "o": color(240, 12, 206),
+    "p": color(156, 6, 6),
+    "q": color(212, 212, 212),
+    "r": color(255, 0, 106),
+    "s": color(247, 237, 237),
+    "t": color(101, 67, 33),
+    "u": color(242, 208, 97),
+    "v": color(5, 151, 230),
+    "w": color(173, 163, 163),
+    "x": color(92, 56, 54),
+    "y": color(248, 224, 200),
+    "z": color(250, 145, 8),
+    "A": color(156, 30, 5),
+    "B": color(247, 75, 45),
+    "/": color(219, 219, 219),
+    "C": color(245, 176, 98),
+    "D": color(255,227,159),
+    "E": color(158, 222, 102),
+    "F": color(207, 207, 207),
+};
+draw = function() {
+time += 0.015;
+if(time >= 0){
+// bitmap
+var bitmap = [
+"glglglllggglllglglglllglllglllgllgggllglllggglllglllglglglllglllglglglgg",
+"glglglggggglggglglglglglglglggglglalalalggggglggglglglglglglgglgglglglgg",
+"glglglllggglllglglglllglllglllglglalalalllggglggglglglglglllgglgglglglgg",
+"glglggglggggglglglglgggllgglggglaalaalalagggglggglglglglgllggglggggggggg",
+"glllglllggglllglllglggglglglllalaaaaalalllagglllglllglllglglgglgglglglgg",
+"ggggggggggggggggggggggggggaaaaaaaaaaaaaaaaaaaggggggggggggggggggggggggggg",
+"ggggggggggggggggggggggggaaaaaaaaaaaaaaaaaaaaaaaggggggggggggggggggggggggg",
+"ggggggggggggggggggggggaaaaaaaaaaaaaaaaaaaaaaaaaaaggggggggggggggggggggggg",
+"ggggggggggggggggggggaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaggggggggggggggggggggg",
+"ggggggggggggggggggaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaggggggggggggggggggg",
+"ggggggggggggggggaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaggggggggggggggggg",
+"ggggggggggggggaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaggggggggggggggg",
+"ggggggggggggaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaggggggggggggg",
+"ggggggggggaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaggggggggggg",
+"ggggggggaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaggggggggg",
+"ggggggaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaggggggg",
+"ggggaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagggggg",
+"ggaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaggg",
+"gggggggggggjjkjjj///////////////jjkjjj///////////////jjkjjjgggggggggggggggg",
+"gggggggggggjkjjjj///////////////jkjjjj///////////////jkjjjjggggggggggggggg",
+"gggggggggggkjjjjj///////////////kjjjjj///////////////kjjjjjggggggggggggggg",
+"gggggggggggjjjjjk///////////////jjjjjk///////////////jjjjjkggggggggggggggg",
+"gggggggggggjjjjkj///////////////jjjjkj///////////////jjjjkjggggggggggggggg",
+"gggggggggggjjjkjj///////////////jjjkjj///////////////jjjkjjggggggggggggggg",
+"gggggggggggjjkjjj///////////////jjkjjj///////////////jjkjjjggggggggggggggg",
+"gggggggggggjkjjjj///////////////jkjjjj///////////////jkjjjjggggggggggggggg",
+"gggggggggggkjjjjj///////////////kjjjjj///////////////kjjjjjgggggggggggggggg",
+"gggggggggggjjjjjk///////////////jjjjjk///////////////jjjjjkggggggggggggggg",
+"gggggggggggjjjjkj///////////////jjjjkj///////////////jjjjkjggggggggggggggg",
+"gggggggggggjjjkjj///////////hhhhjjjkjjhhhh///////////jjjkjjgggggggggggggggg",
+"gggggggggggjjkjjj///////////h///jjkjjj///h///////////jjkjjjgggggggggggggggg",
+"gggggggggggjkjjjj///////////h///jkjjjj///h///////////jkjjjjggggggggggggggg",
+"gggggggggggkjjjjj///////////h///kjjjjj///h///////////kjjjjjggggggggggggggg",
+"gggggggggggjjjjjk///////////h///jjjjjk///h///////////jjjjjkggggggggggggggg",
+"gggggggggggjjjjkj///////////h///jjjjkj///h///////////jjjjkjggggggggggggggg",
+"gggggggggggjjjkjj///////////h///jjjkjj///h///////////jjjkjjggggggggggggggg",
+"gggggggggggjjkjjj///////////h///jjkjjj///h///////////jjkjjjggggggggggggggg",
+"gggggggggggjkjjjj///////////h///jkjjjj///h///////////jkjjjjggggggggggggggg",
+"gggggggggggkjjjjj///////////h///kjjjjj///h///////////kjjjjjggggggggggggggg",
+"gggggggggggjjjjjk///////////h///jjjjjk///h///////////jjjjjkgggggggggggggggg",
+"gggggggggggjjjjkj///////////h///jjjjkj///h///////////jjjjkjggggggggggggggg",
+"gggggggggggjjjkjj///////////h///jjjkjj///h///////////jjjkjjggggggggggggggg",
+"gggggggggggjjkjjj///////////h///jjkjjj///h///////////jjkjjjggggggggggggggg",
+"gggggggggggjkjjjj///////////h///jkjjjj///h///////////jkjjjjggggggggggggggg",
+"gggggggggggkjjjjj///////////h///kjjjjj///h///////////kjjjjjgggggggggggggggg",
+"gggggaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaggggg",
+"ggggaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagggg",
+"gggaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaggg",
+
+
+];
+//loop that draws the pixels
+noStroke ();
+var c = height / bitmap.length;
+bitmap.forEach (function (row, y) {
+    row.split("").forEach (function (cell, x) {
+        fill (colors[cell]);
+        rect (x * c, y * c, c + 1, c + 1);
+    });
+});
+//_________________________________
+}
+
+if(time > 5){
+   // bitmap
+var bitmap = [
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjqqqqjjjjjjjjjjjjjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjqqyyyqqjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjqyyyyyyjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjyylylyyjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjyyyyyyyjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjyaaayjjjjjjuuujjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjyyyjjjjjjuueuujjjjjjjjjjjjbccbcjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjbbbjjjjjl///ljjjjujuuujujjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjbbbcccjjjjll///lljjjujuuujujjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjtttjjjll/////lljjujuuujujjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjllllljlll/////llljjuuuuujjjjjjjjjjjjbcbccjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjttttttttttttttttttttttttttjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjtttttttttttbbbbbbtttttttttttjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttttbttttttbttttttttttjjtttttttttttcbjjjjjjjjjjjj",
+"jjjjjjcbtttttttttttjjtttttttttbttttttttbtttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttbcjjjjjjjj",
+"jjjjjjbctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttccjjjjjjjj",
+"jjjjjjcctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjbctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttbcjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttbcjjjjjjjj",
+"jjjjjjbctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttccjjjjjjjj",
+"jjjjjjcctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbbbbbbbbbbbbttttttttjjtttttttttttcbjjjjjjjjjjjjj",
+"tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt",
+];
+
+noStroke ();
+var c = height / bitmap.length;
+bitmap.forEach (function (row, y) {
+    row.split ("").forEach (function (cell, x) {
+        fill (colors[cell]);
+        rect (x * c, y * c, c + 1, c + 1);
+    });
+});
+   
+   
+   
+   
+}
+if(time >= 5.5){
+    var bitmap = [
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjqqqqjjjjjjjjjjjjjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjqqyyyqqjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjqyyyyyyjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjyylylyyjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjyyyyyyyjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjyaaayjjjjjjuuujjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjbbbjjjjjjyyyjjjjjjuueuujjjjjjjjjjjjbccbcjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjcccccllll///ljjjjujuuujujjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjtttjjllll///lljjjujuuujujjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjll/////lljjujuuujujjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjllllljjjl/////llljjuuuuujjjjjjjjjjjjbcbccjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjttttttttttttttttttttttttttjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjtttttttttttbbbbbbtttttttttttjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttttbttttttbttttttttttjjtttttttttttcbjjjjjjjjjjjj",
+"jjjjjjcbtttttttttttjjtttttttttbttttttttbtttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttbcjjjjjjjj",
+"jjjjjjbctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttccjjjjjjjj",
+"jjjjjjcctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjbctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttbcjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttbcjjjjjjjj",
+"jjjjjjbctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttccjjjjjjjj",
+"jjjjjjcctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbbbbbbbbbbbbttttttttjjtttttttttttcbjjjjjjjjjjjjj",
+"tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt",
+];
+//loop that draws the pixels
+noStroke ();
+var c = height / bitmap.length;
+bitmap.forEach (function (row, y) {
+    row.split ("").forEach (function (cell, x) {
+        fill (colors[cell]);
+        rect (x * c, y * c, c + 1, c + 1);
+    });
+});
+   fill(0, 0, 0);
+textSize(30);
+text("Order In The Court!", width/2-125, height/2-50);
+}
+if(time >= 5.6){
+    
+ var bitmap = [
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjqqqqjjjjjjjjjjjjjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjqqyyyqqjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjqyyyyyyjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjyylylyyjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjyyyyyyyjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjyaaayjjjjjjuuujjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjyyyjjjjjjuueuujjjjjjjjjjjjbccbcjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjbbbjjjjll///ljjjjujuuujujjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjcccccllll///lljjjujuuujujjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjtttjjjll/////lljjujuuujujjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjllllljjjl/////llljjuuuuujjjjjjjjjjjjbcbccjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjttttttttttttttttttttttttttjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjtttttttttttbbbbbbtttttttttttjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttttbttttttbttttttttttjjtttttttttttcbjjjjjjjjjjjj",
+"jjjjjjcbtttttttttttjjtttttttttbttttttttbtttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttbcjjjjjjjj",
+"jjjjjjbctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttccjjjjjjjj",
+"jjjjjjcctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjbctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttbcjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttbcjjjjjjjj",
+"jjjjjjbctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttccjjjjjjjj",
+"jjjjjjcctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbbbbbbbbbbbbttttttttjjtttttttttttcbjjjjjjjjjjjjj",
+"tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt",
+];
+//loop that draws the pixels
+noStroke ();
+var c = height / bitmap.length;
+bitmap.forEach (function (row, y) {
+    row.split ("").forEach (function (cell, x) {
+        fill (colors[cell]);
+        rect (x * c, y * c, c + 1, c + 1);
+    });
+});
+fill(0, 0, 0);
+textSize(30);
+text("Order In The Court!", width/2-125, height/2-50);
+}
+if(time >= 5.7){
+        var bitmap = [
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjqqqqjjjjjjjjjjjjjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjqqyyyqqjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjqyyyyyyjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjyylylyyjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjyyyyyyyjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjyaaayjjjjjjuuujjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjbbbjjjjjjyyyjjjjjjuueuujjjjjjjjjjjjbccbcjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjcccccllll///ljjjjujuuujujjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjtttjjllll///lljjjujuuujujjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjll/////lljjujuuujujjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjllllljjjl/////llljjuuuuujjjjjjjjjjjjbcbccjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjttttttttttttttttttttttttttjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjtttttttttttbbbbbbtttttttttttjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttttbttttttbttttttttttjjtttttttttttcbjjjjjjjjjjjj",
+"jjjjjjcbtttttttttttjjtttttttttbttttttttbtttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttbcjjjjjjjj",
+"jjjjjjbctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttccjjjjjjjj",
+"jjjjjjcctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjbctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttbcjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttbcjjjjjjjj",
+"jjjjjjbctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttccjjjjjjjj",
+"jjjjjjcctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbbbbbbbbbbbbttttttttjjtttttttttttcbjjjjjjjjjjjjj",
+"tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt",
+];
+//loop that draws the pixels
+noStroke ();
+var c = height / bitmap.length;
+bitmap.forEach (function (row, y) {
+    row.split ("").forEach (function (cell, x) {
+        fill (colors[cell]);
+        rect (x * c, y * c, c + 1, c + 1);
+    });
+});
+fill(0, 0, 0);
+textSize(30);
+text("Order In The Court!", width/2-125, height/2-50);
+}
+if(time >= 5.8){
+    
+ var bitmap = [
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjqqqqjjjjjjjjjjjjjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjqqyyyqqjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjqyyyyyyjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjyylylyyjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjyyyyyyyjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjyaaayjjjjjjuuujjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjyyyjjjjjjuueuujjjjjjjjjjjjbccbcjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjbbbjjjjll///ljjjjujuuujujjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjcccccllll///lljjjujuuujujjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjtttjjjll/////lljjujuuujujjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjllllljjjl/////llljjuuuuujjjjjjjjjjjjbcbccjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjttttttttttttttttttttttttttjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjtttttttttttbbbbbbtttttttttttjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttttbttttttbttttttttttjjtttttttttttcbjjjjjjjjjjjj",
+"jjjjjjcbtttttttttttjjtttttttttbttttttttbtttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttbcjjjjjjjj",
+"jjjjjjbctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttccjjjjjjjj",
+"jjjjjjcctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjbctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttbcjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttbcjjjjjjjj",
+"jjjjjjbctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttccjjjjjjjj",
+"jjjjjjcctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbbbbbbbbbbbbttttttttjjtttttttttttcbjjjjjjjjjjjjj",
+"tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt",
+];
+//loop that draws the pixels
+noStroke ();
+var c = height / bitmap.length;
+bitmap.forEach (function (row, y) {
+    row.split ("").forEach (function (cell, x) {
+        fill (colors[cell]);
+        rect (x * c, y * c, c + 1, c + 1);
+    });
+});
+fill(0, 0, 0);
+textSize(30);
+text("Order In The Court!", width/2-125, height/2-50);
+}
+if(time >= 5.9){
+        var bitmap = [
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjqqqqjjjjjjjjjjjjjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjqqyyyqqjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjqyyyyyyjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjyylylyyjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjyyyyyyyjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjyaaayjjjjjjuuujjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjbbbjjjjjjyyyjjjjjjuueuujjjjjjjjjjjjbccbcjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjcccccllll///ljjjjujuuujujjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjtttjjllll///lljjjujuuujujjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjll/////lljjujuuujujjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjllllljjjl/////llljjuuuuujjjjjjjjjjjjbcbccjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjttttttttttttttttttttttttttjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjtttttttttttbbbbbbtttttttttttjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttttbttttttbttttttttttjjtttttttttttcbjjjjjjjjjjjj",
+"jjjjjjcbtttttttttttjjtttttttttbttttttttbtttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttbcjjjjjjjj",
+"jjjjjjbctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttccjjjjjjjj",
+"jjjjjjcctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjbctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttbcjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttbcjjjjjjjj",
+"jjjjjjbctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttccjjjjjjjj",
+"jjjjjjcctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbbbbbbbbbbbbttttttttjjtttttttttttcbjjjjjjjjjjjjj",
+"tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt",
+];
+//loop that draws the pixels
+noStroke ();
+var c = height / bitmap.length;
+bitmap.forEach (function (row, y) {
+    row.split ("").forEach (function (cell, x) {
+        fill (colors[cell]);
+        rect (x * c, y * c, c + 1, c + 1);
+    });
+});
+fill(0, 0, 0);
+textSize(30);
+text("Order In The Court!", width/2-125, height/2-50);
+}
+if(time >= 5.99){
+    
+ var bitmap = [
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjqqqqjjjjjjjjjjjjjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjqqyyyqqjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjqyyyyyyjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjyylylyyjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjyyyyyyyjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjyaaayjjjjjjuuujjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjyyyjjjjjjuueuujjjjjjjjjjjjbccbcjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjbbbjjjjll///ljjjjujuuujujjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjcccccllll///lljjjujuuujujjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjtttjjjll/////lljjujuuujujjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjllllljjjl/////llljjuuuuujjjjjjjjjjjjbcbccjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjttttttttttttttttttttttttttjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjtttttttttttbbbbbbtttttttttttjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttttbttttttbttttttttttjjtttttttttttcbjjjjjjjjjjjj",
+"jjjjjjcbtttttttttttjjtttttttttbttttttttbtttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttbcjjjjjjjj",
+"jjjjjjbctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttccjjjjjjjj",
+"jjjjjjcctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjbctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttbcjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttbcjjjjjjjj",
+"jjjjjjbctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttccjjjjjjjj",
+"jjjjjjcctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbbbbbbbbbbbbttttttttjjtttttttttttcbjjjjjjjjjjjjj",
+"tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt",
+];
+//loop that draws the pixels
+noStroke ();
+var c = height / bitmap.length;
+bitmap.forEach (function (row, y) {
+    row.split ("").forEach (function (cell, x) {
+        fill (colors[cell]);
+        rect (x * c, y * c, c + 1, c + 1);
+    });
+});
+fill(0, 0, 0);
+textSize(30);
+text("Order In The Court!", width/2-125, height/2-50);
+}
+if(time >= 6.09){
+    var bitmap = [
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjqqqqjjjjjjjjjjjjjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjqqyyyqqjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjqyyyyyyjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjyylylyyjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjyyyyyyyjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjyaaayjjjjjjuuujjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjyyyjjjjjjuueuujjjjjjjjjjjjbccbcjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjbbbjjjjjl///ljjjjujuuujujjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjbbbcccjjjjll///lljjjujuuujujjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjtttjjjll/////lljjujuuujujjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjllllljlll/////llljjuuuuujjjjjjjjjjjjbcbccjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjttttttttttttttttttttttttttjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjtttttttttttbbbbbbtttttttttttjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttttbttttttbttttttttttjjtttttttttttcbjjjjjjjjjjjj",
+"jjjjjjcbtttttttttttjjtttttttttbttttttttbtttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttbcjjjjjjjj",
+"jjjjjjbctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttccjjjjjjjj",
+"jjjjjjcctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjbctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttbcjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttbcjjjjjjjj",
+"jjjjjjbctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttccjjjjjjjj",
+"jjjjjjcctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbbbbbbbbbbbbttttttttjjtttttttttttcbjjjjjjjjjjjjj",
+"tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt",
+];
+//loop that draws the pixels
+noStroke ();
+var c = height / bitmap.length;
+bitmap.forEach (function (row, y) {
+    row.split ("").forEach (function (cell, x) {
+        fill (colors[cell]);
+        rect (x * c, y * c, c + 1, c + 1);
+    });
+});
+   
+}
+if(time >= 6.15){
+    var bitmap = [
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjqqqqjjjjjjjjjjjjjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbcclllllljjjjjjjjjjjjjjjqqyyyqqjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjj",
+"jjjjjjcbcclllllljjjjjjjjjjjjjjjqyyyyyyjjjjjjjjjjjjjjjjlllljcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbllllllljjjjjjjjjjjjjjyylylyyjjjjjjjjjjjjjjjlllllllbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbcxxxxxxxjjjjjjjjjjjjjjyyyyyyyjjjjjjjjjjjjjjjlDDDDllcbccjjjjjjjjjjjjj",
+"jjjjjjccbcxxlxlxxjjjjjjjjjjjjjjjyaaayjjjjjjuuujjjjjjjlDlDlDlcbcbjjjjjjjjjjjjj",
+"jjjjjjbccbxxxxxxxjjjjjjjjjjjjjjjjyyyjjjjjjuueuujjjjjjlDDDDDlccbcjjjjjjjjjjj",
+"jjjjjjcbccbxaaaxjjjjjjjjbbbjjjjjl///ljjjjujuuujujjjjjjDaaaDcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjxxxjjjjjjbbbcccjjjjll///lljjjujuuujujjjjjjjDDDjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcblll/llljjjjjjjtttjjjll/////lljjujuuujujjjjjlllllllccbcjjjjjjjjjjjjj",
+"jjjjjjbcllll///lllljjjjllllljlll/////llljjuuuuujjjjlll/////lllccjjjjjjjjjjjj",
+"jjjjjjccllll///lllljjjttttttttttttttttttttttttttjjjllll///llllcbjjjjjjjjjjjjj",
+"jjjjjjbcllll///lllljjtttttttttttbbbbbbtttttttttttjjlllll/lllllbcjjjjjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttttbttttttbttttttttttjjtttttttttttcbjjjjjjjjjjjj",
+"jjjjjjcbtttttttttttjjtttttttttbttttttttbtttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttbcjjjjjjjj",
+"jjjjjjbctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttccjjjjjjjj",
+"jjjjjjcctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjbctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttbcjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttbcjjjjjjjj",
+"jjjjjjbctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttccjjjjjjjj",
+"jjjjjjcctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbbbbbbbbbbbbttttttttjjtttttttttttcbjjjjjjjjjjjjj",
+"tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt",
+];
+//loop that draws the pixels
+noStroke ();
+var c = height / bitmap.length;
+bitmap.forEach (function (row, y) {
+    row.split ("").forEach (function (cell, x) {
+        fill (colors[cell]);
+        rect (x * c, y * c, c + 1, c + 1);
+    });
+});
+   
+}
+if(time >= 6.23){
+    var bitmap = [
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjljjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjljjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjljjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjj",
+"jjjjjjccbcbjjjjjjjljjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjljjjjjjjjjjjjjjjqqqqjjjjjjjjjjjjjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbcclllllljjjjjjjjjjjjjjjqqyyyqqjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjj",
+"jjjjjjcbcclllllljjjjjjjjjjjjjjjqyyyyyyjjjjjjjjjjjjjjjjlllljcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbllllllljjjjjjjjjjjjjjyylylyyjjjjjjjjjjjjjjjlllllllbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbcxxxxxxxjjjjjjjjjjjjjjyyyyyyyjjjjjjjjjjjjjjjlDDDDllcbccjjjjjjjjjjjjj",
+"jjjjjjccbcxxlxlxxjjjjjjjjjjjjjjjyaaayjjjjjjuuujjjjjjjlDlDlDlcbcbjjjjjjjjjjjjj",
+"jjjjjjbccbxxxxxxxjjjjjjjjjjjjjjjjyyyjjjjjjuueuujjjjjjlDDDDDlccbcjjjjjjjjjjj",
+"jjjjjjcbccbxaaaxjjjjjjjjbbbjjjjjl///ljjjjujuuujujjjjjjDaaaDcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjxxxjjjjjjbbbcccjjjjll///lljjjujuuujujjjjjjjDDDjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcblll/llljjjjjjjtttjjjll/////lljjujuuujujjjjjlllllllccbcjjjjjjjjjjjjj",
+"jjjjjjbcllll///lllljjjjllllljlll/////llljjuuuuujjjjlll/////lllccjjjjjjjjjjjj",
+"jjjjjjccllll///lllljjjttttttttttttttttttttttttttjjjllll///llllcbjjjjjjjjjjjjj",
+"jjjjjjbcllll///lllljjtttttttttttbbbbbbtttttttttttjjlllll/lllllbcjjjjjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttttbttttttbttttttttttjjtttttttttttcbjjjjjjjjjjjj",
+"jjjjjjcbtttttttttttjjtttttttttbttttttttbtttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttbcjjjjjjjj",
+"jjjjjjbctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttccjjjjjjjj",
+"jjjjjjcctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjbctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttbcjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttbcjjjjjjjj",
+"jjjjjjbctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttccjjjjjjjj",
+"jjjjjjcctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbbbbbbbbbbbbttttttttjjtttttttttttcbjjjjjjjjjjjjj",
+"tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt",
+];
+//loop that draws the pixels
+noStroke ();
+var c = height / bitmap.length;
+bitmap.forEach (function (row, y) {
+    row.split ("").forEach (function (cell, x) {
+        fill (colors[cell]);
+        rect (x * c, y * c, c + 1, c + 1);
+    });
+});
+fill(0, 0, 0);
+textSize(20);
+   text("It's taken 11 years to get to where I am \ntoday. I believe I am a free man because \nI was on free soil when my owner was alive.", 122, 76);
+}
+if(time >= 6.7){
+    var bitmap = [
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjqqqqjjjjjjjjjjjjjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbcclllllljjjjjjjjjjjjjjjqqyyyqqjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjj",
+"jjjjjjcbcclllllljjjjjjjjjjjjjjjqyyyyyyjjjjjjjjjjjjjjjjlllljcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbllllllljjjjjjjjjjjjjjyylylyyjjjjjjjjjjjjjjjlllllllbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbcxxxxxxxjjjjjjjjjjjjjjyyyyyyyjjjjjjjjjjjjjjjlDDDDllcbccjjjjjjjjjjjjj",
+"jjjjjjccbcxxlxlxxjjjjjjjjjjjjjjjyaaayjjjjjjuuujjjjjjjlDlDlDlcbcbjjjjjjjjjjjjj",
+"jjjjjjbccbxxxxxxxjjjjjjjjjjjjjjjjyyyjjjjjjuueuujjjjjjlDDDDDlccbcjjjjjjjjjjj",
+"jjjjjjcbccbxaaaxjjjjjjjjbbbjjjjjl///ljjjjujuuujujjjjjjDaaaDcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjxxxjjjjjjbbbcccjjjjll///lljjjujuuujujjjjjjjDDDjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcblll/llljjjjjjjtttjjjll/////lljjujuuujujjjjjlllllllccbcjjjjjjjjjjjjj",
+"jjjjjjbcllll///lllljjjjllllljlll/////llljjuuuuujjjjlll/////lllccjjjjjjjjjjjj",
+"jjjjjjccllll///lllljjjttttttttttttttttttttttttttjjjllll///llllcbjjjjjjjjjjjjj",
+"jjjjjjbcllll///lllljjtttttttttttbbbbbbtttttttttttjjlllll/lllllbcjjjjjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttttbttttttbttttttttttjjtttttttttttcbjjjjjjjjjjjj",
+"jjjjjjcbtttttttttttjjtttttttttbttttttttbtttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttbcjjjjjjjj",
+"jjjjjjbctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttccjjjjjjjj",
+"jjjjjjcctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjbctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttbcjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttbcjjjjjjjj",
+"jjjjjjbctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttccjjjjjjjj",
+"jjjjjjcctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbbbbbbbbbbbbttttttttjjtttttttttttcbjjjjjjjjjjjjj",
+"tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt",
+];
+//loop that draws the pixels
+noStroke ();
+var c = height / bitmap.length;
+bitmap.forEach (function (row, y) {
+    row.split ("").forEach (function (cell, x) {
+        fill (colors[cell]);
+        rect (x * c, y * c, c + 1, c + 1);
+    });
+});
+fill(0, 0, 0);
+   text("Your case has been overturned. Slaves are \nconsidered property, and therefore can be \ntaken wherever and still be a slave.", 110, 100);
+}
+if(time > 7.8){
+    var bitmap = [
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjqqqqjjjjjjjjjjjjjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbcclllllljjjjjjjjjjjjjjjqqyyyqqjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjj",
+"jjjjjjcbcclllllljjjjjjjjjjjjjjjqyyyyyyjjjjjjjjjjjjjjjjlllljcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbllllllljjjjjjjjjjjjjjyylylyyjjjjjjjjjjjjjjjlllllllbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbcxxxxxxxjjjjjjjjjjjjjjyyyyyyyjjjjjjjjjjjjjjjlDDDDllcbccjjjjjjjjjjjjj",
+"jjjjjjccbcxxlxlxxjjjjjjjjjjjjjjjyaaayjjjjjjuuujjjjjjjlDlDlDlcbcbjjjjjjjjjjjjj",
+"jjjjjjbccbxxxxxxxjjjjjjjbbbjjjjjjyyyjjjjjjuueuujjjjjjlDDDDDlccbcjjjjjjjjjjj",
+"jjjjjjcbccbxaaaxjjjjjjjjcccclllll///ljjjjujuuujujjjjjjDaaaDcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjxxxjjjjjjjjjtttjjllll///lljjjujuuujujjjjjjjDDDjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcblll/llljjjjjjjjjjjjjll/////lljjujuuujujjjjjlllllllccbcjjjjjjjjjjjjj",
+"jjjjjjbcllll///lllljjjjllllljjjl/////llljjuuuuujjjjlll/////lllccjjjjjjjjjjjj",
+"jjjjjjccllll///lllljjjttttttttttttttttttttttttttjjjllll///llllcbjjjjjjjjjjjjj",
+"jjjjjjbcllll///lllljjtttttttttttbbbbbbtttttttttttjjlllll/lllllbcjjjjjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttttbttttttbttttttttttjjtttttttttttcbjjjjjjjjjjjj",
+"jjjjjjcbtttttttttttjjtttttttttbttttttttbtttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttbcjjjjjjjj",
+"jjjjjjbctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttccjjjjjjjj",
+"jjjjjjcctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjbctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttbcjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttbcjjjjjjjj",
+"jjjjjjbctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttccjjjjjjjj",
+"jjjjjjcctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbbbbbbbbbbbbttttttttjjtttttttttttcbjjjjjjjjjjjjj",
+"tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt",
+];
+//loop that draws the pixels
+noStroke ();
+var c = height / bitmap.length;
+bitmap.forEach (function (row, y) {
+    row.split ("").forEach (function (cell, x) {
+        fill (colors[cell]);
+        rect (x * c, y * c, c + 1, c + 1);
+    });
+});
+
+  
+}
+if(time > 7.9){
+    var bitmap = [
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbcjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbccjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjbcbccjjjjjjjj",
+"jjjjjjccbcbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjccbcbjjjjjjjjjjjjj",
+"jjjjjjbccbcjjjjjjjjjjjjjjjjjjjjjjqqqqjjjjjjjjjjjjjjjjjjjjjjbccbcjjjjjjjjjjjj",
+"jjjjjjcbcclllllljjjjjjjjjjjjjjjqqyyyqqjjjjjjjjjjjjjjjjjjjjjcbccbjjjjjjjj",
+"jjjjjjcbcclllllljjjjjjjjjjjjjjjqyyyyyyjjjjjjjjjjjjjjjjlllljcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcbllllllljjjjjjjjjjjjjjyylylyyjjjjjjjjjjjjjjjlllllllbcbcjjjjjjjjjjjjj",
+"jjjjjjbcbcxxxxxxxjjjjjjjjjjjjjjyyyyyyyjjjjjjjjjjjjjjjlDDDDllcbccjjjjjjjjjjjjj",
+"jjjjjjccbcxxlxlxxjjjjjjjjjjjjjjjyaaayjjjjjjuuujjjjjjjlDlDlDlcbcbjjjjjjjjjjjjj",
+"jjjjjjbccbxxxxxxxjjjjjjjjjjjjjjjjyyyjjjjjuueuujjjjjjlDDDDDlccbcjjjjjjjjjjj",
+"jjjjjjcbccbxaaaxjjjjjjjjbbbjjlllll///ljjjjujuuujujjjjjjDaaaDcbccbjjjjjjjjjjjjj",
+"jjjjjjcbccbjxxxjjjjjjjjjcccclllll///lljjjujuuujujjjjjjjDDDjcbccbjjjjjjjjjjjjj",
+"jjjjjjcbcblll/llljjjjjjjtttjjjll/////lljjujuuujujjjjjlllllllccbcjjjjjjjjjjjjj",
+"jjjjjjbcllll///lllljjjjllllljjjl/////llljjuuuuujjjjlll/////lllccjjjjjjjjjjjj",
+"jjjjjjccllll///lllljjjttttttttttttttttttttttttttjjjllll///llllcbjjjjjjjjjjjjj",
+"jjjjjjbcllll///lllljjtttttttttttbbbbbbtttttttttttjjlllll/lllllbcjjjjjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttttbttttttbttttttttttjjtttttttttttcbjjjjjjjjjjjj",
+"jjjjjjcbtttttttttttjjtttttttttbttttttttbtttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttbcjjjjjjjj",
+"jjjjjjbctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttccjjjjjjjj",
+"jjjjjjcctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjbctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttbcjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttbcjjjjjjjj",
+"jjjjjjbctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttccjjjjjjjj",
+"jjjjjjcctttttttttttjjttttttttbttttttttttbttttttttjjtttttttttttcbjjjjjjjj",
+"jjjjjjcbtttttttttttjjttttttttbbbbbbbbbbbbttttttttjjtttttttttttcbjjjjjjjjjjjjj",
+"tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt",
+];
+//loop that draws the pixels
+noStroke ();
+var c = height / bitmap.length;
+bitmap.forEach (function (row, y) {
+    row.split ("").forEach (function (cell, x) {
+        fill (colors[cell]);
+        rect (x * c, y * c, c + 1, c + 1);
+    });
+});
+
+}
+
+};
+
+
+
+    }};
+
+    var canvas = document.getElementById("mycanvas"); 
+
+    var processingInstance = new Processing(canvas, sketchProc); 
+ </script>
+
+</html>
